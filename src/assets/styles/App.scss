@@ -1,0 +1,11 @@
+@import "./components/_globales.scss";
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0px;
+  font-family: $fuente;
+  background-color: $color-secundario;
+  @include font-size(16px);
+}
