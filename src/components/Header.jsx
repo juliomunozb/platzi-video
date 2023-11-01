@@ -1,20 +1,18 @@
 import React from "react";
 import "../assets/styles/components/Header.scss";
+import logo from "../assets/static/logo-visionRibbon.png";
+import userIcon from "../assets/static/user-icone.png";
 //Componente Presentational: Solo van a tener una sección de HTML dentro proyecto
 const Header = () => {
   return (
     <header className="header">
       <div className="header--logo">
-        <img
-          className="header__img"
-          src="./assets/logo-visionRibbon.png"
-          alt="Logo"
-        />
+        <img className="header__img" src={logo} alt="Logo" />
         <span className="header__span">VisionRibbon</span>
       </div>
       <div className="header__menu">
         <div className="header__menu--profile">
-          <img src="./assets/user-icone.png" alt="user" />
+          <img src={userIcon} alt="user" />
           <p>Perfil</p>
         </div>
         <ul>
