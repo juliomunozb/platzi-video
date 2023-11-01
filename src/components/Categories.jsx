@@ -1,7 +1,7 @@
 import React from "react";
 import "../assets/styles/components/Categories.scss";
 const Categories = ({ children }) => (
-  <div ClassName="categories">
+  <div className="categories">
     <h2 className="categories__title">Mi lista</h2>
     {children}
   </div>
