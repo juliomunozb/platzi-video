@@ -1,35 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Header from "../components/Header";
 import Search from "../components/Search";
 import Categories from "../components/Categories";
 import Carousel from "../components/Carousel";
 import CarouselItem from "../components/CarouselItem";
 import Footer from "../components/Footer";
+import useInitialState from "../hooks/useInitialState";
 import "../assets/styles/App.scss";
+
 const API = "http://localhost:3000/initalState";
 
 const App = () => {
-  const [videos, setVideos] = useState([]);
+  const initialState = useInitialState(API);
+  const dataVideos = Object.keys(initialState).length;
 
-  useEffect(() => {
-    const videos = async () => {
-      try {
-        const response = await fetch(API);
-        const data = await response.json();
-        setVideos(data);
-      } catch (error) {
-        setVideos([]);
-        console.log("Error invocando API", error.message);
-      }
-    };
-    videos();
-  }, []);
-
-  return (
+  return dataVideos === 0 ? (
+    <h1>Loading...</h1>
+  ) : (
     <div className="App">
       <Header />
       <Search />
-      {(videos.myList || []).length > 0 && (
+      {(initialState.myList || []).length > 0 && (
         <Categories title="Mi lista">
           <Carousel>
             <CarouselItem />
@@ -39,8 +30,8 @@ const App = () => {
 
       <Categories title="Tendencias">
         <Carousel>
-          {(videos.trends || []).length > 0 &&
-            videos.trends.map((video) => (
+          {(initialState.trends || []).length > 0 &&
+            initialState.trends.map((video) => (
               <CarouselItem key={video.id} {...video} />
             ))}
         </Carousel>
@@ -48,8 +39,8 @@ const App = () => {
 
       <Categories title="Recomendados">
         <Carousel>
-          {(videos.originals || []).length > 0 &&
-            videos.originals.map((video) => (
+          {(initialState.originals || []).length > 0 &&
+            initialState.originals.map((video) => (
               <CarouselItem key={video.id} {...video} />
             ))}
         </Carousel>
