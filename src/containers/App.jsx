@@ -25,33 +25,33 @@ const App = () => {
     videos();
   }, []);
 
-  console.log(videos);
   return (
     <div className="App">
       <Header />
       <Search />
-      <Categories title="Mi lista">
-        <Carousel>
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-        </Carousel>
-      </Categories>
+      {(videos.myList || []).length > 0 && (
+        <Categories title="Mi lista">
+          <Carousel>
+            <CarouselItem />
+          </Carousel>
+        </Categories>
+      )}
+
       <Categories title="Tendencias">
         <Carousel>
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
+          {(videos.trends || []).length > 0 &&
+            videos.trends.map((video) => (
+              <CarouselItem key={video.id} {...video} />
+            ))}
         </Carousel>
       </Categories>
+
       <Categories title="Recomendados">
         <Carousel>
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
-          <CarouselItem />
+          {(videos.originals || []).length > 0 &&
+            videos.originals.map((video) => (
+              <CarouselItem key={video.id} {...video} />
+            ))}
         </Carousel>
       </Categories>
       <Footer />
